@@ -1,22 +1,34 @@
-import logging
-import yaml
 import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from controllers.controller import app
+from src.main.config.config import config
+from src.main.controllers.controller1 import router as controller1
+from src.main.controllers.controller2 import router as controller2
+from src.main.util import server_util
+
+app_name = config['backend']['name']
+app_description = config['backend']['description'] + " (" + config['backend']['env'] + ")"
+
+app = FastAPI(title=app_name, description=app_description)
+app.include_router(controller1, prefix="/controller1")
+app.include_router(controller2, prefix="/controller2")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=config['backend']['server']['allowedOrigins'],
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
+app_server = FastAPI()
+server_path = config['backend']['server']['path']
+app_server.mount(server_path, app)
 
 if __name__ == "__main__":
+    host = config['backend']['server']['host']
+    port = config['backend']['server']['port']
 
-    dashes = ''.join(['-' for i in range(60)])
-    host = "localhost"
-    port = 8300
+    server_util.print_startup_message()
 
-    print('\n' + dashes)
-    print("RONNY BROS. LLC")
-    print(dashes)
-    print("Starting 'FASTAPI-APP'")
-    print(dashes)
-    print("Check out the Swagger UI at http://{}:{}/docs".format(host, port))
-    print(dashes + '\n')
-
-    uvicorn.run(app, host=host, port=port)
-    
+    uvicorn.run(app_server, host=host, port=port)
