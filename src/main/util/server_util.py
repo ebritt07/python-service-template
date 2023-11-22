@@ -15,13 +15,9 @@ def print_startup_message():
     msg = "\n".join([
         "\n",
         dashes,
-        "RONNY BROS. LLC",
-        dashes,
         "Welcome to '" + app_name + "'",
         dashes,
         "Check out the Swagger UI at http://{0}:{1}{2}/docs".format(host, port, server_path),
-        dashes,
-        "Check out the ReDoc at http://{0}:{1}{2}/redoc".format(host, port, server_path),
         dashes,
         "\n"
     ])

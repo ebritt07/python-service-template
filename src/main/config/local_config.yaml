@@ -1,11 +1,9 @@
 backend:
-  name: Python Template
-  description: a starting python service
+  name: Python Service
+  description: a python service
   env: local
 
   server:
     host: "0.0.0.0"
-    port: 4000
+    port: 80
     path: "/py-svc"
-    allowedOrigins:
-      - "http://localhost:3000"
