@@ -2,7 +2,7 @@ from src.main.config.config import config
 
 
 def print_startup_message():
-    dashes = "".join(["-" for i in range(60)])
+    dashes = "".join(["-" for _ in range(60)])
 
     app_name = config['backend']['name']
     host = config['backend']['server']['host']

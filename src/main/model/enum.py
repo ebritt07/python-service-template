@@ -1,8 +1,8 @@
 from enum import Enum
 
 
-class PolicyType(Enum):
-    AUTO = "AUTO"
-    BOAT = "BOAT"
-    HOMEOWNER = "HOMEOWNER"
-    RENTER = "RENTER"
+class Transmission(str, Enum):
+    MANUAL = "Manual"
+    AUTOMATIC = "Automatic"
+    CVT = "CVT"
+    SINGLE_SPEED = "Single Speed"
