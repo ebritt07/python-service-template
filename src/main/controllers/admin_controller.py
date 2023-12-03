@@ -1,11 +1,9 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
 
 from src.main.util.logger import logger
 
 
-
-router = APIRouter(tags=["Admin Controller"])
+router = APIRouter(tags=["Admin Operations"])
 
 
 @router.get("/ping", name="Health check", description="returns 200")
